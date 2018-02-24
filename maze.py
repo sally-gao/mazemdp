@@ -1,15 +1,17 @@
 from random import shuffle, randrange
+from mdpstate import MDPState
 
 class Maze:
-    def __init__(self, w=10, h=10):
-        """
-        Creates a maze of specified size.
-        Output is a list of lists, to be used as a matrix with coordinates.
-        '#' = wall
-        ' ' = empty space
+    
+    """
+    Creates a maze of specified size.
+    Output is a list of lists, to be used as a matrix with coordinates.
+    '#' = wall
+    ' ' = empty space
         
-        Adapted from http://rosettacode.org/wiki/Maze_generation#Python
-        """
+    Adapted from http://rosettacode.org/wiki/Maze_generation#Python
+    """
+    def __init__(self, w=10, h=10):
             
         self.vis = [[0] * w + [1] for _ in range(h)] + [[1] * (w + 1)]
         self.ver = [["# "] * w + ['#'] for _ in range(h)] + [[]]
@@ -43,4 +45,46 @@ class Maze:
     def __repr__(self):
         strlst = [''.join(row) for row in self.matrix]
         return '\n'.join(strlst)
+    
+def maze_to_mdp(maze):
+    
+    """Returns a matrix of MDPState objects for each free space in a maze"""
+    
+    grid = maze.matrix
+
+    for i in range(1, len(maze.matrix) - 1):
+        for j in range(1, len(maze.matrix) - 1):
+            
+            #represent walls as #
+            if maze.matrix[i][j] == '#':
+                grid[i][j] = '#'
+                continue
+                
+            if maze.matrix[i-1][j] == '#':
+                north = (i, j)
+            else:
+                north = (i-1, j)
+                
+            if maze.matrix[i+1][j] == '#':
+                south = (i, j)
+            else:
+                south = (i+1, j)
+                
+            if maze.matrix[i][j+1] == '#':
+                east = (i, j)
+            else:
+                east = (i, j+1)
+                
+            if maze.matrix[i][j-1] == '#':
+                west = (i, j)
+            else:
+                west = (i, j-1)
+                
+            grid[i][j] = MDPState(north, south, west, east)
+            
+    return(grid)
+            
+if __name__ == '__main__':
+    print(Maze())
+    print(maze_to_mdp(Maze()))
 
