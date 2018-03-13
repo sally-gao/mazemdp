@@ -1,5 +1,6 @@
 from random import shuffle, randrange
 from mdpstate import MDPState
+from copy import deepcopy
 
 class Maze:
     
@@ -50,7 +51,7 @@ def maze_to_mdp(maze):
     
     """Returns a matrix of MDPState objects for each free space in a maze"""
     
-    grid = maze.matrix
+    grid = deepcopy(maze.matrix)
 
     for i in range(1, len(maze.matrix) - 1):
         for j in range(1, len(maze.matrix) - 1):
@@ -82,9 +83,11 @@ def maze_to_mdp(maze):
                 
             grid[i][j] = MDPState(north, south, west, east)
             
+    grid[1][1].reward = 1
+            
     return(grid)
             
 if __name__ == '__main__':
     print(Maze())
-    print(maze_to_mdp(Maze()))
+    test = maze_to_mdp(Maze())
 
