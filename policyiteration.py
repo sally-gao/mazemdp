@@ -59,7 +59,7 @@ def prettify_policy(policy):
     return(policy_str)
 
 if __name__ == '__main__':
-    test_maze = maze.Maze()
+    test_maze = maze.Maze(w=20, h=20)
     test_grid = maze.maze_to_mdp(test_maze)
     test_policy = policy_iteration(test_grid, .9)
     test_policy_str = prettify_policy(test_policy)
