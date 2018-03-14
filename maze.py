@@ -83,7 +83,7 @@ def maze_to_mdp(maze):
                 
             grid[i][j] = MDPState(north, south, west, east)
             
-    grid[1][1].reward = 1
+    grid[1][1].reward = 1000
             
     return(grid)
             
