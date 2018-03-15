@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Mar 13 15:07:18 2018
-
-@author: Duncan
-"""
-
 import maze
 import re
 
@@ -60,8 +53,7 @@ def prettify_policy(policy):
 
 if __name__ == '__main__':
     test_maze = maze.Maze(w=20, h=20)
-    test_grid = maze.maze_to_mdp(test_maze)
-    test_policy = policy_iteration(test_grid, .9)
+    test_policy = policy_iteration(test_maze.grid, .9)
     test_policy_str = prettify_policy(test_policy)
 
     print(test_maze)

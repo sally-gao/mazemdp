@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Mar 14 17:53:05 2018
-
-@author: Duncan
-"""
-
 import maze
 import re
 
@@ -15,6 +8,7 @@ def value_iteration(grid, gamma):
     actions = ['up', 'down', 'left', 'right']
 
     is_value_changed = True
+    
     while is_value_changed:
         is_value_changed = False
         for i in range(len(grid)):
@@ -22,7 +16,7 @@ def value_iteration(grid, gamma):
                     if grid[i][j] != '#':
                         q = []
                         for a in actions:
-                            neighbor = getattr(grid[i][j], a)
+                            neighbor = getattr(grid[i][j], a) # Get coordinates of neighboring cell
                             q.append(grid[i][j].reward + gamma * grid[neighbor[0]][neighbor[1]].value)
                         v = max(q)
                         
@@ -52,8 +46,7 @@ def prettify_policy(policy):
 
 if __name__ == '__main__':
     test_maze = maze.Maze(w=20, h=20)
-    test_grid = maze.maze_to_mdp(test_maze)
-    test_policy = value_iteration(test_grid, .9)
+    test_policy = value_iteration(test_maze.grid, .9)
     test_policy_str = prettify_policy(test_policy)
 
     print(test_maze)

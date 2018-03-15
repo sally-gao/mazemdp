@@ -1,6 +1,7 @@
 
 class MDPState:
-    """State class for a given space in gridworld, with directional attributes pointing to other squares."""
+    """State class for a given space in gridworld, with directional attributes pointing to other squares.
+    Each directional attribute is a tuple of coordinates (x, y). """
 
     def __init__(self, up, down, left, right, reward=-1, value=0):
         self.up = up
