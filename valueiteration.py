@@ -8,6 +8,7 @@ Created on Wed Mar 14 17:53:05 2018
 import maze
 import re
 
+
 def value_iteration(grid, gamma):
 
     policy = [['up' for i in range(len(grid[0]))] for j in range(len(grid))]

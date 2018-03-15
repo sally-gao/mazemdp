@@ -7,19 +7,20 @@ Created on Tue Mar 13 13:11:27 2018
 
 import turtle
 import maze
+import random
 
 wn = turtle.Screen()
 wn.bgcolor("black")
 wn.title("A Maze Game")
 wn.setup(700,700)
-wn.exitonclick()
+#wn.exitonclick()
 
 #Create Pen
 class Pen(turtle.Turtle):
     def __init__(self):
         turtle.Turtle.__init__(self)
         self.shape("square")
-        self.color("green")
+        self.color("#008080")
         self.penup()
         self.speed(0) #Animation speed
 
@@ -74,6 +75,8 @@ def policy_iteration_animate(grid, gamma):
 
 #Create Level Setup Function
 def setup_maze(level):
+    
+    wn.tracer(0, 0)
     for y in range(len(level)):
         for x in range(len(level[y])):
             #Get the character at each x, y coordinate
@@ -91,6 +94,8 @@ def setup_maze(level):
     pen.color('red')
     pen.goto(-264, 264)
     pen.stamp()
+    
+    wn.update()
                 
     #turtle.done()
 
@@ -99,6 +104,7 @@ def animate_policy(policy):
     
     pen.shape('arrow')
     wn.tracer(0,0)
+    
     
     for y in range(len(policy)):
         for x in range(len(policy[y])):
@@ -147,6 +153,7 @@ pen = Pen()
 
 #Set up the maze
 if __name__ == '__main__':
+    random.seed(1)
     test_maze = maze.Maze(w=10, h=10)
     test_grid = maze.maze_to_mdp(test_maze)
     #test_policy = policyiteration.policy_iteration(test_grid, .9)
