@@ -120,12 +120,11 @@ gradient_dict = {col_list[i]: gradient.get('hex')[i] for i in range(len(gradient
 if __name__ == '__main__':
     random.seed(1)
     test_maze = maze.Maze(w=10, h=10)
-    test_grid = maze.maze_to_mdp(test_maze)
-    test_policy = value_iteration(test_grid, .9)
+    test_policy = value_iteration(test_maze.grid, .9)
     
     
     
-    values = [[state.value for state in row if state != '#'] for row in test_grid]
+    values = [[state.value for state in row if state != '#'] for row in test_maze.grid]
     values = sum(values, [])
     
 

@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Mar 13 13:11:27 2018
-@author: yhao
-"""
-#Adampted from; https://www.youtube.com/watch?v=-0q_miviUDs&list=PLlEgNdBJEO-lNDJgg90fmfAq9RzORkQWP&index=2
-
 import turtle
 import maze
 import random
@@ -155,9 +148,8 @@ pen = Pen()
 if __name__ == '__main__':
     random.seed(1)
     test_maze = maze.Maze(w=10, h=10)
-    test_grid = maze.maze_to_mdp(test_maze)
     #test_policy = policyiteration.policy_iteration(test_grid, .9)
-    policy_iteration_animate(test_grid, .9)
+    policy_iteration_animate(test_maze.grid, .9)
     #setup_maze(test_grid)
 
 
