@@ -1,6 +1,7 @@
 from random import shuffle, randrange
 from mdpstate import MDPState
 from copy import deepcopy
+from collections import deque
 
 class Maze:
     
@@ -11,25 +12,54 @@ class Maze:
     ' ' = empty space
         
     Adapted from http://rosettacode.org/wiki/Maze_generation#Python
+    (Depth-first search from example code rewritten as a non-recursive algorithm)
     """
     
     def __init__(self, w=10, h=10):
-        
-        self.vis = [[0] * w + [1] for _ in range(h)] + [[1] * (w + 1)]
-        self.ver = [["# "] * w + ['#'] for _ in range(h)] + [[]]
-        self.hor = [["##"] * w + ['#'] for _ in range(h + 1)]
                      
         self.matrix = self.make_maze(w, h)
         
         self.grid = self.maze_to_mdp()
     
     def make_maze(self, w, h):
-
-        self.walk(randrange(w), randrange(h))
         
+        visited = [[0] * w + [1] for _ in range(h)] + [[1] * (w + 1)]
+        ver = [["# "] * w + ['#'] for _ in range(h)] + [[]]
+        hor = [["##"] * w + ['#'] for _ in range(h + 1)]
+
+        to_visit = deque([(randrange(h), randrange(w))])
+
+        while len(to_visit) > 0:
+        
+            current = to_visit.pop()
+            
+            y = current[0]
+            x = current[1]
+            
+            
+            visited[y][x] = 1
+        
+            neighbors = [(x - 1, y), (x, y + 1), (x + 1, y), (x, y - 1)]
+            
+            shuffle(neighbors)
+            
+            for (xx, yy) in neighbors:
+                if visited[yy][xx]: continue
+                to_visit.append((yy, xx))
+            
+            if len(to_visit) > 1:
+                
+                current_neighbor = to_visit[-1]
+        
+                yy = current_neighbor[0]
+                xx = current_neighbor[1]
+        
+                if xx == x: hor[max(y, yy)][x] = "# "
+                if yy == y: ver[y][max(x, xx)] = "  "
+
         cells = ""
         
-        for (a, b) in zip(self.hor, self.ver):
+        for (a, b) in zip(hor, ver):
             cells += ''.join(a + ['\n'] + b + ['\n'])
             
         cells = cells.split('\n')
@@ -38,17 +68,6 @@ class Maze:
         del cells[len(cells)-1]
         
         return [row for row in cells]
-        
-    def walk(self, x, y):
-        self.vis[y][x] = 1
- 
-        d = [(x - 1, y), (x, y + 1), (x + 1, y), (x, y - 1)]
-        shuffle(d)
-        for (xx, yy) in d:
-            if self.vis[yy][xx]: continue
-            if xx == x: self.hor[max(y, yy)][x] = "# "
-            if yy == y: self.ver[y][max(x, xx)] = "  "
-            self.walk(xx, yy)
  
     def __repr__(self):
         strlst = [''.join(row) for row in self.matrix]

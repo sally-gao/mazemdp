@@ -118,18 +118,24 @@ col_list = range(-10, 102, 5)
 gradient_dict = {col_list[i]: gradient.get('hex')[i] for i in range(len(gradient.get('hex')))}
 
 if __name__ == '__main__':
-    random.seed(1)
+    
     test_maze = maze.Maze(w=10, h=10)
-    test_policy = value_iteration(test_maze.grid, .9)
-    
-    
-    
-    values = [[state.value for state in row if state != '#'] for row in test_maze.grid]
-    values = sum(values, [])
-    
+    #test_maze = oldMaze(w=10, h=10)
+    setup_maze(test_maze.grid)
+    turtle.done()
 
-    print(min(values))
-    print(max(values))
+#    random.seed(1)
+#    test_maze = maze.Maze(w=10, h=10)
+#    test_policy = value_iteration(test_maze.grid, .9)
+#    
+#    
+#    
+#    values = [[state.value for state in row if state != '#'] for row in test_maze.grid]
+#    values = sum(values, [])
+#    
+#
+#    print(min(values))
+#    print(max(values))
     #print(gradient_dict)
 
     #print(test_maze)
