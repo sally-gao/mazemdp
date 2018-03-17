@@ -1,4 +1,5 @@
-import maze
+from AldousBroder import AldousBroder
+from AldousBroder import maze_to_mdp
 import re
 
 def policy_iteration(grid, gamma):
@@ -52,8 +53,9 @@ def prettify_policy(policy):
     return(policy_str)
 
 if __name__ == '__main__':
-    test_maze = maze.Maze(w=20, h=20)
-    test_policy = policy_iteration(test_maze.grid, .9)
+    test_maze = AldousBroder(50, 50).generate()
+    test_mdp = maze_to_mdp(test_maze)
+    test_policy = policy_iteration(test_mdp, .9)
     test_policy_str = prettify_policy(test_policy)
 
     print(test_maze)

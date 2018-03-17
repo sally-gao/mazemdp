@@ -38,7 +38,7 @@ class Maze:
         del cells[len(cells)-1]
         
         return [row for row in cells]
-        
+     
     def walk(self, x, y):
         self.vis[y][x] = 1
  
@@ -97,5 +97,5 @@ class Maze:
             
 if __name__ == '__main__':
     new_maze = Maze()
-    print(new_maze)
+    print(new_maze.matrix)
 

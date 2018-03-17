@@ -10,6 +10,7 @@ import gradienthelper
 import turtle
 import random
 from time import sleep
+import AldousBroder
 
 wn = turtle.Screen()
 wn.bgcolor("white")
@@ -24,16 +25,24 @@ class Pen(turtle.Turtle):
         self.penup()
         self.shape("square")
         self.color("black")
-        self.speed(0) #Animation speed
+        self.speed(0)
+        self.ht()
+        #Animation speed
 
 def value_iteration(grid, gamma):
     
     setup_maze(grid)
+    
+    iterations = 0
 
     policy = [['up' for i in range(len(grid[0]))] for j in range(len(grid))]
     actions = ['up', 'down', 'left', 'right']
     
-    sleep(2)
+    pen.color('black')
+    pen.goto(-297, -50)
+    pen.write('Iterations: {}'.format(iterations), font=('Arial', 20, 'normal'))
+    
+    sleep(1)
 
     is_value_changed = True
     while is_value_changed:
@@ -51,7 +60,8 @@ def value_iteration(grid, gamma):
                             is_value_changed = True
                             grid[i][j].value = v
                             
-        animate_values(grid)
+        iterations += 1
+        animate_values(grid, iterations)
     turtle.done()
                             
     for i in range(len(grid)):
@@ -88,7 +98,7 @@ def setup_maze(level):
     #pen.goto(-264, 264)
     #pen.stamp()
     
-def animate_values(grid):
+def animate_values(grid, iterations):
     
     wn.tracer(0, 0)
     for y in range(len(grid)):
@@ -109,6 +119,30 @@ def animate_values(grid):
                 pen.color(gradient_dict.get(int(round(character.value/5.)*5), '#008080'))
                 pen.stamp()
                 
+    pen.color('white')
+    pen.goto(-288, -34)
+    pen.stamp()
+    pen.goto(-268, -34)
+    pen.stamp()
+    pen.goto(-248, -34)
+    pen.stamp()
+    pen.goto(-228, -34)
+    pen.stamp()
+    pen.goto(-208, -34)
+    pen.stamp()
+    pen.goto(-188, -34)
+    pen.stamp()
+    pen.goto(-168, -34)
+    pen.stamp()
+    pen.goto(-148, -34)
+    pen.stamp()
+    pen.goto(-128, -34)
+    pen.stamp()
+    
+    pen.color('black')
+    pen.goto(-297, -50)
+    pen.write('Iterations: {}'.format(iterations), font=('Arial', 20, 'normal'))
+                
     wn.update()
             
 pen = Pen()
@@ -118,18 +152,20 @@ col_list = range(-10, 102, 5)
 gradient_dict = {col_list[i]: gradient.get('hex')[i] for i in range(len(gradient.get('hex')))}
 
 if __name__ == '__main__':
-    random.seed(1)
-    test_maze = maze.Maze(w=10, h=10)
-    test_policy = value_iteration(test_maze.grid, .9)
+    random.seed(103)
+    test = AldousBroder.AldousBroder(6, 6).generate()
+    test_mdp = AldousBroder.maze_to_mdp(test)
+    test_policy = value_iteration(test_mdp, .9)
     
     
     
-    values = [[state.value for state in row if state != '#'] for row in test_maze.grid]
-    values = sum(values, [])
+    #values = [[state.value for state in row if state != '#'] for row in test_maze.grid]
+    #values = sum(values, [])
     
-
-    print(min(values))
-    print(max(values))
+    #setup_maze(test)
+    #turtle.done()
+    #print(min(values))
+    #print(max(values))
     #print(gradient_dict)
 
     #print(test_maze)

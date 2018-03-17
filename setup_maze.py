@@ -1,6 +1,6 @@
 import turtle
-import maze
 import random
+import AldousBroder
 
 wn = turtle.Screen()
 wn.bgcolor("black")
@@ -15,7 +15,9 @@ class Pen(turtle.Turtle):
         self.shape("square")
         self.color("#008080")
         self.penup()
-        self.speed(0) #Animation speed
+        self.speed(0)
+        self.ht()
+        #Animation speed
 
 def policy_iteration_animate(grid, gamma):
     is_policy_changed = True
@@ -24,6 +26,8 @@ def policy_iteration_animate(grid, gamma):
     
     actions = ['up', 'down', 'left', 'right']
     policy = [['up' for i in range(len(grid[0]))] for j in range(len(grid))]
+    
+    iterations = 0
 
     
     # Policy iteration
@@ -60,7 +64,9 @@ def policy_iteration_animate(grid, gamma):
                         is_policy_changed = True
                         policy[i][j] = best_action
                         
-        animate_policy(policy)
+        iterations += 1                        
+        animate_policy(policy, iterations)
+
         
     turtle.done()
     return(policy)
@@ -68,6 +74,8 @@ def policy_iteration_animate(grid, gamma):
 
 #Create Level Setup Function
 def setup_maze(level):
+    
+    pen.ht()
     
     wn.tracer(0, 0)
     for y in range(len(level)):
@@ -93,11 +101,11 @@ def setup_maze(level):
     #turtle.done()
 
     
-def animate_policy(policy):
+def animate_policy(policy, iterations):
     
     pen.shape('arrow')
+    pen.ht()
     wn.tracer(0,0)
-    
     
     for y in range(len(policy)):
         for x in range(len(policy[y])):
@@ -137,6 +145,28 @@ def animate_policy(policy):
     pen.shape('square')
     pen.goto(-264, 264)
     pen.stamp()
+    
+    pen.color('black')
+    pen.goto(-288, -34)
+    pen.stamp()
+    pen.goto(-268, -34)
+    pen.stamp()
+    pen.goto(-248, -34)
+    pen.stamp()
+    pen.goto(-228, -34)
+    pen.stamp()
+    pen.goto(-208, -34)
+    pen.stamp()
+    pen.goto(-188, -34)
+    pen.stamp()
+    pen.goto(-168, -34)
+    pen.stamp()
+    pen.goto(-148, -34)
+    pen.stamp()
+    
+    pen.color('white')
+    pen.goto(-297, -50)
+    pen.write('Iterations: {}'.format(iterations), font=('Arial', 20, 'normal'))
                 
     wn.update()
 
@@ -146,10 +176,10 @@ pen = Pen()
 
 #Set up the maze
 if __name__ == '__main__':
-    random.seed(1)
-    test_maze = maze.Maze(w=10, h=10)
-    #test_policy = policyiteration.policy_iteration(test_grid, .9)
-    policy_iteration_animate(test_maze.grid, .9)
+    random.seed(105)
+    test = AldousBroder.AldousBroder(6, 6).generate()
+    test_mdp = AldousBroder.maze_to_mdp(test)
+    test_policy = policy_iteration_animate(test_mdp, .9)
     #setup_maze(test_grid)
 
 
