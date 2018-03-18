@@ -3,6 +3,7 @@ from MazeGenAlgo import np
 from random import choice, randrange
 from mdpstate import MDPState
 from copy import deepcopy
+import random
 
 
 """
@@ -22,6 +23,7 @@ class AldousBroder(MazeGenAlgo):
         super(AldousBroder, self).__init__(h, w)
 
     def generate(self):
+        random.seed(0)
         # create empty grid, with walls
         a = np.empty((self.H, self.W), dtype=str)
         a.fill('#')
@@ -72,7 +74,7 @@ def maze_to_mdp(maze):
     grid = deepcopy(maze)
 
     for i in range(1, len(maze) - 1):
-        for j in range(1, len(maze) - 1):
+        for j in range(1, len(maze[i]) - 1):
             
             #represent walls as #
             if maze[i][j] == '#':

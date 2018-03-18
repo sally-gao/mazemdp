@@ -8,10 +8,11 @@ def policy_iteration(grid, gamma):
     policy = [['up' for i in range(len(grid[0]))] for j in range(len(grid))]
     actions = ['up', 'down', 'left', 'right']
     
+    iterations = 0
+    
     # Policy iteration
     while is_policy_changed:
         is_policy_changed = False
-        #print(policy)
         # Policy evaluation
         # Transition probabilities not shown due to deterministic setting
         is_value_changed = True
@@ -41,6 +42,8 @@ def policy_iteration(grid, gamma):
                     if best_action != policy[i][j]:
                         is_policy_changed = True
                         policy[i][j] = best_action
+                        
+        iterations += 1
                     
     return(policy)
     
@@ -53,7 +56,7 @@ def prettify_policy(policy):
     return(policy_str)
 
 if __name__ == '__main__':
-    test_maze = AldousBroder(50, 50).generate()
+    test_maze = AldousBroder(3, 3).generate()
     test_mdp = maze_to_mdp(test_maze)
     test_policy = policy_iteration(test_mdp, .9)
     test_policy_str = prettify_policy(test_policy)

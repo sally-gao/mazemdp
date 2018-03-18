@@ -9,6 +9,9 @@ def value_iteration(grid, gamma):
 
     is_value_changed = True
     
+    iterations = 0
+    
+    # iterate values until convergence
     while is_value_changed:
         is_value_changed = False
         for i in range(len(grid)):
@@ -23,6 +26,8 @@ def value_iteration(grid, gamma):
                         if v != grid[i][j].value:
                             is_value_changed = True
                             grid[i][j].value = v
+                            
+        iterations += 1
                             
     for i in range(len(grid)):
         for j in range(len(grid[i])):

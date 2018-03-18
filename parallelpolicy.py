@@ -1,6 +1,7 @@
 import maze
 import re
 import multiprocessing as mp
+import AldousBroder
 
 def divide_grid(grid):
     """Divides the length of a grid into 4 and returns a list of slice indices."""
@@ -126,8 +127,9 @@ def prettify_policy(policy):
     return(policy_str)
 
 if __name__ == '__main__':
-    test_maze = maze.Maze(w=20, h=20)
-    test_policy = parallel_pi(test_maze.grid, .9)
+    test_maze = AldousBroder.AldousBroder(3, 3).generate()
+    test_mdp = AldousBroder.maze_to_mdp(test_maze)
+    test_policy = parallel_pi(test_maze, .9)
     test_policy_str = prettify_policy(test_policy)
 
     print(test_maze)

@@ -177,7 +177,7 @@ pen = Pen()
 #Set up the maze
 if __name__ == '__main__':
     random.seed(105)
-    test = AldousBroder.AldousBroder(6, 6).generate()
+    test = AldousBroder.AldousBroder(5, 5).generate()
     test_mdp = AldousBroder.maze_to_mdp(test)
     test_policy = policy_iteration_animate(test_mdp, .9)
     #setup_maze(test_grid)

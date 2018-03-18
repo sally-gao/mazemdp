@@ -92,6 +92,11 @@ def setup_maze(level):
                 pen.goto(screen_x, screen_y)
                 pen.stamp()
                 
+    pen.color('red')
+    pen.shape('square')
+    pen.goto(-264, 264)
+    pen.stamp()
+                
     wn.update()
                 
     #pen.color('red')
@@ -137,6 +142,11 @@ def animate_values(grid, iterations):
     pen.goto(-148, -34)
     pen.stamp()
     pen.goto(-128, -34)
+    pen.stamp()
+    
+    pen.color('red')
+    pen.shape('square')
+    pen.goto(-264, 264)
     pen.stamp()
     
     pen.color('black')
