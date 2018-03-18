@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Mar 14 21:44:09 2018
-
-@author: Duncan
-"""
-
 import gradienthelper
 import turtle
 import random
