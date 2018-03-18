@@ -3,6 +3,10 @@ from AldousBroder import maze_to_mdp
 import re
 
 def policy_iteration(grid, gamma):
+    """
+    Performs policy iteration on a given grid of MDPState objects.
+    """
+    
     is_policy_changed = True
     
     policy = [['up' for i in range(len(grid[0]))] for j in range(len(grid))]

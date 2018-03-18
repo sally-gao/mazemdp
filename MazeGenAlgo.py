@@ -3,6 +3,7 @@ import numpy as np
 from numpy.random import shuffle
 
 """
+Adapted from:
 https://github.com/illiterati1/python_maze
 """
 

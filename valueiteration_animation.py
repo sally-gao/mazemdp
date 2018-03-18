@@ -5,7 +5,6 @@ Created on Wed Mar 14 21:44:09 2018
 @author: Duncan
 """
 
-import maze
 import gradienthelper
 import turtle
 import random
@@ -164,6 +163,7 @@ gradient_dict = {col_list[i]: gradient.get('hex')[i] for i in range(len(gradient
 if __name__ == '__main__':
     random.seed(103)
     test = AldousBroder.AldousBroder(6, 6).generate()
+    print(test)
     test_mdp = AldousBroder.maze_to_mdp(test)
     test_policy = value_iteration(test_mdp, .9)
     

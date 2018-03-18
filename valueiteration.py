@@ -3,6 +3,9 @@ import re
 
 
 def value_iteration(grid, gamma):
+    """
+    Performs value iteration on a given grid of MDPState objects.
+    """
 
     policy = [['up' for i in range(len(grid[0]))] for j in range(len(grid))]
     actions = ['up', 'down', 'left', 'right']

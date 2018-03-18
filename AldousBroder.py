@@ -7,6 +7,7 @@ import random
 
 
 """
+Adapted from:
 https://github.com/illiterati1/python_maze
 """
 
