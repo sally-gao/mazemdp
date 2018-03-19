@@ -1,6 +1,10 @@
 import maze
 import re
 
+"""
+Duncan Rule, Sally Gao, Yi Hao
+"""
+
 
 def value_iteration(grid, gamma):
     """

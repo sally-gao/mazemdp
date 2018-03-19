@@ -7,6 +7,10 @@ import random
 
 
 """
+Duncan Rule, Sally Gao, Yi Hao
+"""
+
+"""
 Adapted from:
 https://github.com/illiterati1/python_maze
 """

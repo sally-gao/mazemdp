@@ -1,3 +1,6 @@
+"""
+Duncan Rule, Sally Gao, Yi Hao
+"""
 
 class MDPState:
     """State class for a given space in gridworld, with directional attributes pointing to other squares.

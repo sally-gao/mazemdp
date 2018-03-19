@@ -3,6 +3,10 @@ import random
 import AldousBroder
 from time import sleep
 
+"""
+Duncan Rule, Sally Gao, Yi Hao
+"""
+
 wn = turtle.Screen()
 wn.bgcolor("black")
 wn.title("A Maze Game")

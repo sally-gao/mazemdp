@@ -2,6 +2,10 @@ from AldousBroder import AldousBroder
 from AldousBroder import maze_to_mdp
 import re
 
+"""
+Duncan Rule, Sally Gao, Yi Hao
+"""
+
 def policy_iteration(grid, gamma):
     """
     Performs policy iteration on a given grid of MDPState objects.
