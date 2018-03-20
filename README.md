@@ -12,8 +12,10 @@ complexities is desirable for large problems, as MDPs are widely used as a basis
 and policy iteration. In addition to these classic algorithms, one additional technique that may
 improve performance is policy iteration with parallel processing; the calculation of V π (s) and π(s)
 within each iteration can be parallelized because these values can be derived individually from previous iterations of the algorithm.
+
 The specific research question of this paper is: How does the computation time grow for each
 MDP-solving technique as the size and discount factor of the MDP are varied?
+
 We simulate randomized maze environments of varying sizes and compare computation times
 and iteration amounts of (A) value iteration, (B) policy iteration and (C) policy iteration with
 parallel processing.
